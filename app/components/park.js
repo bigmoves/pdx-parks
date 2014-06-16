@@ -20,20 +20,24 @@ module.exports = React.createClass({
     this.setState({ loaded: true, park: park });
   },
 
+  renderAmenitities: function() {
+    var amenities = this.state.park.amenities;
+    return amenities && amenities.map(function(item) {
+      return <li>{item}</li>
+    });
+  },
+
   render: function() {
     if (!this.state.loaded) {
       return <div>Loading...</div>
     }
     var park = this.state.park;
-    var amenities = park.amenities.map(function(item) {
-      return <li>{item}</li>
-    });
     return (
       <div>
         <h1>{park.Property}</h1>
         <h2>{park.Address}</h2>
         <ul>
-          {amenities}
+          {this.renderAmenitities()}
         </ul>
       </div>
     );
