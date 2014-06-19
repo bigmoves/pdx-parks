@@ -8,7 +8,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       size: this.props.size
-    }
+    };
   },
 
   static: {
@@ -53,6 +53,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return <div ref="spinner"/>
+    return <div ref="spinner" className="spin"/>
   }
 });

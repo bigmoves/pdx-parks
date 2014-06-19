@@ -30,7 +30,7 @@ module.exports = React.createClass({
 
   render: function() {
     if (!this.state.loaded) {
-      return <div className="container"><Spin size="small" /></div>
+      return <div className="container"><Spin /></div>
     }
     var park = this.state.park;
     return (

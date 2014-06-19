@@ -66,7 +66,7 @@ var ParkList = React.createClass({
       var href = '/parks/'+park.PropertyID;
       return <li><h3><Link to="park" parkId={park.PropertyID}>{park.Property}</Link></h3></li>
     });
-    if (this.props.loading) return <Spin size="small" />
+    if (this.props.loading) return <Spin />
     return <ul className="park-list">{parks}</ul>
   }
 });
