@@ -2,6 +2,12 @@ var $ = require('jquery');
 
 var api = 'http://localhost:3000/api';
 
+var cache = {
+  loaded: false,
+  records: [],
+  map: {}
+};
+
 function findQuery(collection, query, cb) {
   $.ajax(api+'/'+collection+'/search?q='+query)
   .then(function(results) {

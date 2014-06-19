@@ -2,6 +2,7 @@
 
 var React = require('react');
 var store = require('../store');
+var Spin = require('./spin');
 
 module.exports = React.createClass({
 
@@ -13,7 +14,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    store.find('parks', this.props.id, this.setStateAfterFind);
+    store.find('parks', this.props.params.parkId, this.setStateAfterFind);
   },
 
   setStateAfterFind: function(park) {
@@ -29,11 +30,11 @@ module.exports = React.createClass({
 
   render: function() {
     if (!this.state.loaded) {
-      return <div>Loading...</div>
+      return <div className="container"><Spin size="small" /></div>
     }
     var park = this.state.park;
     return (
-      <div>
+      <div className="container">
         <h1>{park.Property}</h1>
         <h2>{park.Address}</h2>
         <ul>

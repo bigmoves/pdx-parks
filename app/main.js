@@ -1,16 +1,19 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var Parks = require('./components/parks');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+
+var Search = require('./components/search');
+var Results = require('./components/results');
 var Park = require('./components/park');
-var page = require('page');
+var App = require('./components/app');
 
-page('/', function() {
-  React.renderComponent(<Parks/>, document.body);
-});
+Router.useHistory();
 
-page('/parks/:id', function(ctx) {
-  React.renderComponent(<Park id={ctx.params.id} />, document.body);
-});
-
-page();
+Router(
+  <Route handler={App}>
+    <Route name="search" path="/search" handler={Results} />
+    <Route name="park" path="/parks/:parkId" handler={Park} />
+  </Route>
+).renderComponent(document.body);
