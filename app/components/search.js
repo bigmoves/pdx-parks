@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var ReactRouter = require('react-router');
+var ReactRouter = require('react-nested-router');
 var Router = ReactRouter.Router;
 var SearchForm = require('./search-form');
 

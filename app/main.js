@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var ReactRouter = require('react-router');
+var ReactRouter = require('react-nested-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
