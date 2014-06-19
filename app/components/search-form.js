@@ -20,7 +20,7 @@ module.exports = React.createClass({
           <input
             className="form-control"
             type="text"
-            placeholder="Search..."
+            placeholder="Find a park..."
             ref="filterTextInput"
             defaultValue={query}
           />

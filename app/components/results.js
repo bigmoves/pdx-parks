@@ -14,7 +14,7 @@ module.exports = React.createClass({
     return {
       parksLoaded: false,
       parks: []
-    }
+    };
   },
 
   componentDidMount: function() {
@@ -40,33 +40,46 @@ module.exports = React.createClass({
   render: function() {
     if (!this.props.query.q) return this.renderIndex();
     return (
-      <div className="results-page">
-        <div className="header">
-          <div className="container">
-            <SearchForm
-              query={this.props.query.q}
-              onSearchSubmit={this.handleSubmit}
-            />
-          </div>
+      <div>
+        <div className="search">
+          <SearchForm
+            query={this.props.query.q}
+            onSearchSubmit={this.handleSubmit}
+          />
         </div>
-        <div className="container">
-          <div className="sort-bar">
-            <h3>{this.state.parks.length} results found.</h3>
-          </div>
-          <ParkList data={this.state.parks} loading={!this.state.parksLoaded} />
+        <div className="sort-bar">
+          <h3>{this.state.parks.length} results found.</h3>
         </div>
+        <ParkList data={this.state.parks} loading={!this.state.parksLoaded} />
       </div>
+    );
+  }
+});
+
+var ParkListItem = React.createClass({
+  render: function() {
+    var park = this.props.park;
+    return (
+      <li className="park-list-item">
+        <h3>
+          <Link to="park" parkId={park.PropertyID}>{park.Property}</Link>
+        </h3>
+      </li>
     );
   }
 });
 
 var ParkList = React.createClass({
   render: function() {
+    var msg = "We couldn't find anything";
     var parks = this.props.data.map(function(park) {
-      var href = '/parks/'+park.PropertyID;
-      return <li><h3><Link to="park" parkId={park.PropertyID}>{park.Property}</Link></h3></li>
+      return <ParkListItem park={park} />
     });
-    if (this.props.loading) return <Spin />
+
+    if (this.props.loading)
+      return <Spin />
+    if (!this.props.data.length)
+      return <div className="well">{msg}</div>
     return <ul className="park-list">{parks}</ul>
   }
 });

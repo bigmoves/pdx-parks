@@ -6,9 +6,11 @@ var NavBar = require('./nav-bar');
 module.exports = React.createClass({
   render: function() {
     return (
-      <div className="application">
+      <div>
         <NavBar />
-        {this.props.activeRoute}
+        <div className="container">
+          {this.props.activeRoute}
+        </div>
       </div>
     );
   }

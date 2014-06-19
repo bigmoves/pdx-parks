@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding-top: 50px;
 }
 
 .spin {
@@ -15,59 +15,26 @@ body {
   right: 0;
 }
 
-.search-page {
-  padding-top: 120px;
-}
-
-.search-page .container {
-  width: 740px;
-}
-
-.search-page .searchBar, .results-page .searchBar {
+.searchBar {
   float: left;
   margin-right: 5px;
 }
 
-.search-page input, .results-page input {
-  width: 630px;
-}
-
-.results-page .header {
-  margin-bottom: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+.search {
+  padding: 15px 0;
   border-bottom: 1px solid #eee;
 }
 
-.results-page .container {
-  width: 980px;
-}
-
-.sort-bar h3 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.sort-bar {
-  border-bottom: 1px dotted #ddd;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-}
-
 .park-list {
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.park-list li {
-  list-style: none;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px dotted #ddd;
-}
-
-.park-list h3 {
   margin: 0;
-  font-size: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.park-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
 }

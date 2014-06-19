@@ -13,13 +13,9 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className="search-page">
-        <div className="container">
-          <div className="search">
-            <h2><i className="fa fa-tree"></i> Portland Parks</h2>
-            <SearchForm onSearchSubmit={this.handleSearchSubmit} />
-          </div>
-        </div>
+      <div>
+        <h2><i className="fa fa-tree"></i> Portland Parks</h2>
+        <SearchForm onSearchSubmit={this.handleSearchSubmit} />
       </div>
     );
   }
