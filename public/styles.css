@@ -15,6 +15,21 @@ body {
   right: 0;
 }
 
+.sort-bar {
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.sort-bar h3 {
+  float: left;
+  margin: 0;
+  font-size: 16px;
+}
+
+.sort-bar .sort-dropdown {
+  float: right;
+}
+
 .searchBar {
   float: left;
   margin-right: 5px;
@@ -25,6 +40,10 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+.not-found {
+  margin-top: 15px;
+}
+
 .park-list {
   margin: 0;
   padding: 0;
@@ -32,7 +51,7 @@ body {
 }
 
 .park-list-item {
-  padding: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
   text-overflow: ellipsis;
   overflow: hidden;

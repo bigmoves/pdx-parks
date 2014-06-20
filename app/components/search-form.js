@@ -14,6 +14,7 @@ module.exports = React.createClass({
 
   render: function() {
     var query = this.props.query;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="searchBar">

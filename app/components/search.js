@@ -7,15 +7,15 @@ var SearchForm = require('./search-form');
 
 module.exports = React.createClass({
 
-  handleSearchSubmit: function(filterText) {
-    this.props.onSearchSubmit(filterText);
+  handleSubmit: function(filterText) {
+    this.props.onSubmit(filterText);
   },
 
   render: function() {
     return (
       <div>
         <h2><i className="fa fa-tree"></i> Portland Parks</h2>
-        <SearchForm onSearchSubmit={this.handleSearchSubmit} />
+        <SearchForm onSubmit={this.handleSubmit} />
       </div>
     );
   }
