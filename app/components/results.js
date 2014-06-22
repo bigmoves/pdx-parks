@@ -8,30 +8,40 @@ var SearchForm = require('./search-form');
 var Search = require('./search');
 var Spin = require('./spin');
 var SortDropdown = require('./sort-dropdown');
+var Pagination = require('./pagination');
 
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
       parksLoaded: false,
-      parks: []
+      parks: [],
+      count: 0
     };
   },
 
   componentDidMount: function() {
-    if (this.props.query.q)
-      store.findQuery('parks', this.props.query.q, this.setStateAfterParks);
+    var query = this.props.query.q;
+    var page = this.props.query.p;
+    var offset = (this.props.query.p * 10) - 10;
+
+    if (!page || page === 1)
+      offset = 0;
+
+    if (query)
+      store.findQuery('parks', query, offset, this.setStateAfterParks);
   },
 
-  setStateAfterParks: function(parks) {
+  setStateAfterParks: function(payload) {
     this.setState({
       parksLoaded: true,
-      parks: parks
+      parks: payload.parks,
+      count: payload.count
     });
   },
 
-  handleSubmit: function(filterText) {
-    window.location.href = 'search?q='+filterText;
+  handleSubmit: function(query) {
+    window.location.href = 'search?q='+query;
   },
 
   renderIndex: function() {
@@ -41,10 +51,10 @@ module.exports = React.createClass({
   renderSortBar: function() {
     var options = ["Best Match", "Most Popular"];
 
-    if (this.state.parks.length)
+    if (this.state.count) {
       return (
         <div className="sort-bar clearfix">
-          <h3>{this.state.parks.length} results found.</h3>
+          <h3>{this.state.count} results found.</h3>
           <div className="sort-dropdown">
             <SortDropdown
               size="smaller"
@@ -54,6 +64,7 @@ module.exports = React.createClass({
           </div>
         </div>
       );
+    }
   },
 
   renderParkList: function() {
@@ -64,7 +75,17 @@ module.exports = React.createClass({
       return <Spin />
     if (!this.state.parks.length)
       return <div className="well not-found"><b>{notFoundMsg}</b></div>
-    return <ParkList data={this.state.parks} />
+
+    return (
+      <div>
+        <ParkList data={this.state.parks} />
+        <Pagination
+          page={this.props.query.p}
+          count={this.state.count}
+          query={this.props.query.q}
+        />
+      </div>
+    );
   },
 
   render: function() {
@@ -76,7 +97,7 @@ module.exports = React.createClass({
         <div className="search">
           <SearchForm
             query={this.props.query.q}
-            onSearchSubmit={this.handleSubmit}
+            onSubmit={this.handleSubmit}
           />
         </div>
         {this.renderSortBar()}

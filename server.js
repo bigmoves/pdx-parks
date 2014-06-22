@@ -5,19 +5,34 @@ var port = Number(process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/api/parks/search', function(req, res) {
-  var parks, results, query = req.query.q;
-
-  db.search('parks', query)
-  .then(function(results) {
-    results = results.body.results;
-    parks = results.map(function(result) {
+function serialize(items) {
+  return items.map(function(result) {
       var json = {};
       json = result.value;
       json.id = result.path.key;
       return json;
     });
-    res.json(200, parks);
+}
+
+app.get('/api/parks/search', function(req, res) {
+  var parks,
+      items,
+      query = req.query.q,
+      offset = +req.query.offset;
+
+  db.newSearchBuilder()
+  .collection('parks')
+  .limit(10)
+  .offset(offset)
+  .query(query)
+
+  .then(function(results) {
+    items = results.body.results;
+    parks = serialize(items);
+    res.json(200, {
+      count: results.body.total_count,
+      parks: parks
+    });
   })
   .fail(function(error) {
     res.json(404, {error: error.body.message});
