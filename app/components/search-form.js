@@ -6,7 +6,7 @@ var store = require('../store');
 module.exports = React.createClass({
 
   handleSubmit: function() {
-    this.props.onSearchSubmit(
+    this.props.onSubmit(
       this.refs.filterTextInput.getDOMNode().value
     );
     return false;

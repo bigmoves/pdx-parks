@@ -57,3 +57,7 @@ body {
   overflow: hidden;
   cursor: pointer;
 }
+
+.park-list-item h3 {
+  margin: 10px 0;
+}
