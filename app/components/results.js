@@ -23,13 +23,14 @@ module.exports = React.createClass({
   componentDidMount: function() {
     var query = this.props.query.q;
     var page = this.props.query.p;
+    var filter = this.props.query.f;
     var offset = (this.props.query.p * 10) - 10;
 
     if (!page || page === 1)
       offset = 0;
 
     if (query)
-      store.findQuery('parks', query, offset, this.setStateAfterParks);
+      store.findQuery('parks', query, offset, filter, this.setStateAfterParks);
   },
 
   setStateAfterParks: function(payload) {
@@ -40,8 +41,23 @@ module.exports = React.createClass({
     });
   },
 
-  handleSubmit: function(query) {
-    window.location.href = 'search?q='+query;
+  handleSubmit: function(query, filter) {
+    if (filter) {
+      window.location.href = 'search?q='+query+'&f='+filter;
+    } else {
+      window.location.href = 'search?q='+query;
+    }
+  },
+
+  handleFilter: function(filter) {
+    var query = this.props.query.q;
+    var page = this.props.query.p;
+
+    if (page) {
+      window.history.replaceState({}, '', 'search?q='+query+'&p='+page+'&f='+filter);
+    } else {
+      window.history.replaceState({}, '', 'search?q='+query+'&f='+filter);
+    }
   },
 
   renderIndex: function() {
@@ -83,6 +99,7 @@ module.exports = React.createClass({
           page={this.props.query.p}
           count={this.state.count}
           query={this.props.query.q}
+          filter={this.props.query.f}
         />
       </div>
     );
@@ -97,7 +114,9 @@ module.exports = React.createClass({
         <div className="search">
           <SearchForm
             query={this.props.query.q}
+            filter={this.props.query.f}
             onSubmit={this.handleSubmit}
+            onFilter={this.handleFilter}
           />
         </div>
         {this.renderSortBar()}

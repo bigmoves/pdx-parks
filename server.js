@@ -18,7 +18,12 @@ app.get('/api/parks/search', function(req, res) {
   var parks,
       items,
       query = req.query.q,
-      offset = +req.query.offset;
+      offset = +req.query.offset,
+      filter = req.query.filter;
+
+  if (filter) {
+    query = 'value.'+filter+':"'+query+'"';
+  }
 
   db.newSearchBuilder()
   .collection('parks')

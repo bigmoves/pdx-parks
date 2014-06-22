@@ -22,11 +22,12 @@ var Pagination = React.createClass({
     var firstPage = 1;
     var lastPage = Math.ceil(this.props.count / offset);
     var query = this.props.query;
+    var filter = this.props.filter;
     var links = [];
 
     if (currentPage >= 9) {
-      links.push(<li><a href={href(query, 1)}>1</a></li>);
-      links.push(<li><a href={href(query, 2)}>2</a></li>);
+      links.push(<li><a href={href(query, filter, 1)}>1</a></li>);
+      links.push(<li><a href={href(query, filter, 2)}>2</a></li>);
       links.push(<li><a href="#">...</a></li>);
     }
 
@@ -37,21 +38,20 @@ var Pagination = React.createClass({
       start = lastPage - 9;
       end = lastPage + 1;
     }
-    console.log(currentPage)
 
     for (var i = start; i < end; i++) {
       var isActive = (i === currentPage);
       if (i <= lastPage) {
         links.push(
-          <Link page={i} href={href(query, i)} isActive={isActive} />
+          <Link page={i} href={href(query, filter, i)} isActive={isActive} />
         );
       }
     }
 
     if (lastPage > 9 && currentPage <= (lastPage - 9)) {
       links.push(<li><a href="#">...</a></li>);
-      links.push(<li><a href={href(query, lastPage - 1)}>{lastPage - 1}</a></li>);
-      links.push(<li><a href={href(query, lastPage)}>{lastPage}</a></li>);
+      links.push(<li><a href={href(query, filter, lastPage - 1)}>{lastPage - 1}</a></li>);
+      links.push(<li><a href={href(query, filter, lastPage)}>{lastPage}</a></li>);
     }
 
     function isDisabled(link) {
@@ -67,19 +67,20 @@ var Pagination = React.createClass({
     return (
       <ul className="pagination">
         <li className={isDisabled('prev') ? 'disabled' : ''}>
-          <a href={href(query, currentPage - 1)}>&laquo;</a>
+          <a href={href(query, filter, currentPage - 1)}>&laquo;</a>
         </li>
         {links}
         <li className={isDisabled('next') ? 'disabled' : ''}>
-          <a href={href(query, currentPage + 1)}>&raquo;</a>
+          <a href={href(query, filter, currentPage + 1)}>&raquo;</a>
         </li>
       </ul>
     );
   }
 });
 
-function href(query, page) {
-  return 'search?q='+query+'&p='+page;
+function href(query, filter, page) {
+  var filterParam = (filter ? '&f='+filter : '');
+  return 'search?q='+query+'&p='+page+filterParam;
 }
 
 module.exports = Pagination;

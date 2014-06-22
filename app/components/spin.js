@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var $ = require('jquery');
 
 module.exports = React.createClass({
 
@@ -11,20 +10,18 @@ module.exports = React.createClass({
     };
   },
 
-  static: {
-    sizes: {
-      large: {
-        lines: 11,
-        length: 6,
-        width: 3,
-        radius: 7
-      },
-      small: {
-        lines: 10,
-        length: 4,
-        width: 2,
-        radius: 3.5
-      }
+  sizes: {
+    large: {
+      lines: 11,
+      length: 6,
+      width: 3,
+      radius: 7
+    },
+    small: {
+      lines: 10,
+      length: 4,
+      width: 2,
+      radius: 3.5
     }
   },
 
@@ -47,7 +44,7 @@ module.exports = React.createClass({
       top: "auto",
       left: "auto"
     };
-    var size = this.static.sizes[this.state.size];
+    var size = this.sizes[this.state.size];
     $.extend(options, size);
     new Spinner(options).spin(this.refs.spinner.getDOMNode());
   },

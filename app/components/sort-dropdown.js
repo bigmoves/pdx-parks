@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-require('../../public/dropdown.js');
 
 module.exports = React.createClass({
 

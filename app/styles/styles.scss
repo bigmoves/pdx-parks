@@ -18,19 +18,17 @@ body {
 .sort-bar {
   padding: 15px 0;
   border-bottom: 1px solid #eee;
+   h3 {
+    float: left;
+    margin: 0;
+    font-size: 16px;
+  }
+  .sort-dropdown {
+    float: right;
+  }
 }
 
-.sort-bar h3 {
-  float: left;
-  margin: 0;
-  font-size: 16px;
-}
-
-.sort-bar .sort-dropdown {
-  float: right;
-}
-
-.searchBar {
+.search-bar {
   float: left;
   margin-right: 5px;
 }
@@ -48,16 +46,14 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.park-list-item {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.park-list-item h3 {
-  margin: 10px 0;
+  .park-list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+    h3 {
+      margin: 10px 0;
+    }
+  }
 }

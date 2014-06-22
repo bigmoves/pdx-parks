@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 var api = 'http://localhost:3000/api';
 
 var cache = {
@@ -8,9 +6,10 @@ var cache = {
   map: {}
 };
 
-function findQuery(collection, query, offset, cb) {
+function findQuery(collection, query, offset, filter, cb) {
   var offsetParam = offset ? '&offset='+offset : '';
-  $.ajax(api+'/'+collection+'/search?q='+query+offsetParam)
+  var filterParam = filter ? '&filter='+filter : '';
+  $.ajax(api+'/'+collection+'/search?q='+query+offsetParam+filterParam)
   .then(function(results) {
     cb(results);
   });
