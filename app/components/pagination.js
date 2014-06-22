@@ -20,7 +20,7 @@ var Pagination = React.createClass({
     var offset = 10;
     var currentPage = +this.props.page || 1;
     var firstPage = 1;
-    var lastPage = Math.floor(this.props.count / offset);
+    var lastPage = Math.ceil(this.props.count / offset);
     var query = this.props.query;
     var links = [];
 
@@ -33,10 +33,11 @@ var Pagination = React.createClass({
     var start = (currentPage < 9 ? firstPage : currentPage - 4);
     var end = (currentPage < 9 ? firstPage + 9 : currentPage + 5);
 
-    if (currentPage > (lastPage - 9)) {
+    if (currentPage > 9 && (currentPage > (lastPage - 9))) {
       start = lastPage - 9;
       end = lastPage + 1;
     }
+    console.log(currentPage)
 
     for (var i = start; i < end; i++) {
       var isActive = (i === currentPage);
