@@ -53,11 +53,11 @@ module.exports = React.createClass({
     var query = this.props.query.q;
     var page = this.props.query.p;
 
-    if (page) {
-      window.history.replaceState({}, '', 'search?q='+query+'&p='+page+'&f='+filter);
-    } else {
-      window.history.replaceState({}, '', 'search?q='+query+'&f='+filter);
-    }
+    var queryParam = (query ? 'q='+query : '');
+    var pageParam = (page ? '&p='+page : '');
+    var filterParam = (filter ? '&f='+filter : '');
+
+    window.history.replaceState({}, '', 'search?'+queryParam+pageParam+filterParam);
   },
 
   renderIndex: function() {

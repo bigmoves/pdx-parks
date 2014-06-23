@@ -22,14 +22,18 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      filter: this.props.filter,
-      label: ''
+      filter: this.props.filter
     };
   },
 
   handleClick: function(key) {
-    this.setState({filter: key});
-    this.props.handleClick(key);
+    if (this.state.filter === key) {
+      this.setState({filter: ''});
+      this.props.handleClick('');
+    } else {
+      this.setState({filter: key});
+      this.props.handleClick(key);
+    }
   },
 
   size: {

@@ -21,9 +21,14 @@ module.exports = React.createClass({
   },
 
   handleFilter: function(filter) {
-    this.setState({filter: filter});
-    this.refs.filterTextInput.getDOMNode().focus();
-    this.props.onFilter(filter);
+    if (!filter) {
+      this.setState({filter: ''});
+      this.props.onFilter(filter);
+    } else {
+      this.setState({filter: filter});
+      this.refs.filterTextInput.getDOMNode().focus();
+      this.props.onFilter(filter);
+    }
   },
 
   render: function() {
