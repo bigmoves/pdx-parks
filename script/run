@@ -1,4 +1,5 @@
 #!/bin/sh
 npm install
+bower install
 NODE_ENV=production node_modules/.bin/webpack
 node server
